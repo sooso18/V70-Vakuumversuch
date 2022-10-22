@@ -16,36 +16,37 @@ VT = ufloat(33.0, 3.3)
 # Anfangsdruck p0 = 5 * 10^-3 mbar
 p0T = ufloat(5 * 10**(-3), 0.3*5 * 10**(-3))
 
-# Enddruck pe = 1.5 * 10^-5 mbar
-peT = ufloat(1.5 * 10**(-5), 0.3*1.5 * 10**(-5))
+# Enddruck pe = 2.01 * 10^-5 mbar (Evakuierung Messung 1)
+peT1 = ufloat(2.01 * 10**(-5), 0.3*2.01 * 10**(-5))
+
+
+# Enddruck pe = 1.72 * 10^-5 mbar (Evakuierung Messung 2)
+peT2 = ufloat(1.72 * 10**(-5), 0.3*1.72 * 10**(-5))
+
+
+# Enddruck pe = 1.71 * 10^-5 mbar (Evakuierung Messung 3)
+peT3 = ufloat(1.71 * 10**(-5), 0.3*1.71 * 10**(-5))
 
 # Daten für die p(t)-Kurve der Turbopumpe
-t1, p_1T, p_2T, p_3T = np.genfromtxt('data/evakuierung_turbo.txt',comments='#',delimiter=',',unpack=True)
+t1, p_1T, p_2T, p_3T = np.genfromtxt('evak_turbo.txt',comments='#',unpack=True)
 
-# Daten für die Leckrate der Turbopumpe
-t, p_1TL1, p_2TL1, p_3TL1 = np.genfromtxt('data/leck_turbo_pg=1e-4.txt',comments='#',delimiter=',',unpack=True)
-t, p_1TL2, p_2TL2, p_3TL2 = np.genfromtxt('data/leck_turbo_pg=2e-4.txt',comments='#',delimiter=',',unpack=True)
-t, p_1TL5, p_2TL5, p_3TL5 = np.genfromtxt('data/leck_turbo_pg=5e-5.txt',comments='#',delimiter=',',unpack=True)
-t, p_1TL7, p_2TL7, p_3TL7 = np.genfromtxt('data/leck_turbo_pg=7e-5.txt',comments='#',delimiter=',',unpack=True)
+# Daten für die Leckrate der Turbopumpe (p_1=5*10^-5, p_2=7*10^-5, p_3=1*10^-4, p_4=2*10^-4)
+t, p_1TL, p_2TL, p_3TL = np.genfromtxt('leck_turbo.txt',comments='#',unpack=True)
 
+#Drehschieberpumpe: Volumen 34L +- 3.4L (10%)
+VD = ufloat(34.0, 3.4)
 
-#Drehschieberpumpe:
-VD = ufloat(10.0, 0.8)
+# Anfangsdruck p0 = 1000mbar
+p0D = ufloat(1000, 0.003*1200)
 
-# Anfangsdruck p0 = 998mbar
-p0D = ufloat(998, 0.003*1200)
+# Enddruck pe = 0.016 mbar mit Fehler 10%
+peD = ufloat(0.016, 0.0016)
 
-# Enddruck pe = 0.012 mbar
-peD = ufloat(0.012, 0.0012)
+# Daten für die p(t)-Kurve der Drehschieberpumpe (600s, alle 10s)
+t2, p_1D = np.genfromtxt('evak_dreh.txt',comments='#',unpack=True)
 
-# Daten für die p(t)-Kurve der Drehschieberpumpe
-t2, p_1D, p_2D, p_3D = np.genfromtxt('data/evakuierung_dreh.txt',comments='#',delimiter=',',unpack=True)
-
-# Daten für die Leckrate der Drehschieberpumpe
-t3, p_1DL1, p_2DL1, p_3DL1 = np.genfromtxt('data/leck_dreh_pg=0.5.txt',comments='#',delimiter=',',unpack=True)
-t3, p_1DL9, p_2DL9, p_3DL9 = np.genfromtxt('data/leck_dreh_pg=9.7.txt',comments='#',delimiter=',',unpack=True)
-t3, p_1DL50, p_2DL50, p_3DL50 = np.genfromtxt('data/leck_dreh_pg=50.txt',comments='#',delimiter=',',unpack=True)
-t3, p_1DL100, p_2DL100, p_3DL100 = np.genfromtxt('data/leck_dreh_pg=100.txt',comments='#',delimiter=',',unpack=True)
+# Daten für die Leckrate der Drehschieberpumpe Leck 0,5: 3 Messungen + 3 weitere Lecks
+t3, p_1DL1, p_2DL1, p_3DL1, p_1DL10, p_1DL50,p_1DL100 = np.genfromtxt('leck_dreh.txt',comments='#',unpack=True)
 
 #----------------Berechnungen--------------
 def mittel(a,b,c):
